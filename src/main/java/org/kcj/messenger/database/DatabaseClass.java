@@ -1,9 +1,9 @@
-package org.kcj.messenger3.database;
+package org.kcj.messenger.database;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.kcj.messenger3.model.Message;
-import org.kcj.messenger3.model.Profile;
+import org.kcj.messenger.model.Message;
+import org.kcj.messenger.model.Profile;
 
 public class DatabaseClass {
 

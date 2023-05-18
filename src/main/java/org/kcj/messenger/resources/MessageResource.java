@@ -1,4 +1,4 @@
-package org.kcj.messenger3.resources;
+package org.kcj.messenger.resources;
 
 import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.Consumes;
@@ -9,12 +9,11 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
-import org.kcj.messenger3.model.Message;
-import org.kcj.messenger3.resources.beans.MessageFilterBean;
-import org.kcj.messenger3.service.MessageService;
+import org.kcj.messenger.model.Message;
+import org.kcj.messenger.resources.beans.MessageFilterBean;
+import org.kcj.messenger.service.MessageService;
 
 @Path("messages")
 @Consumes(MediaType.APPLICATION_JSON)

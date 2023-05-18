@@ -1,4 +1,4 @@
-package org.kcj.messenger3.model;
+package org.kcj.messenger.model;
 
 import java.util.Date;
 

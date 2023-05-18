@@ -1,4 +1,4 @@
-package org.kcj.messenger3.resources;
+package org.kcj.messenger.resources;
 
 import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.DELETE;
@@ -8,11 +8,11 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import java.util.List;
-import org.kcj.messenger3.model.Comment;
-import org.kcj.messenger3.model.Message;
-import org.kcj.messenger3.resources.beans.MessageFilterBean;
-import org.kcj.messenger3.service.CommentService;
-import org.kcj.messenger3.service.MessageService;
+import org.kcj.messenger.model.Comment;
+import org.kcj.messenger.model.Message;
+import org.kcj.messenger.resources.beans.MessageFilterBean;
+import org.kcj.messenger.service.CommentService;
+import org.kcj.messenger.service.MessageService;
 
 @Path("/")
 public class CommentResource {
@@ -44,7 +44,7 @@ public class CommentResource {
 
     @GET
     @Path("{commentId}")
-    public Comment getMessage(@PathParam("message") long messageId, long commentId) {
+    public Comment getMessage(@PathParam("message") long messageId, @PathParam("commentId") long commentId) {
         return commentService.getComment(messageId, commentId);
     }
 }

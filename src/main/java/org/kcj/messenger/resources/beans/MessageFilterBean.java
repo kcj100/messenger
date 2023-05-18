@@ -1,4 +1,4 @@
-package org.kcj.messenger3.resources.beans;
+package org.kcj.messenger.resources.beans;
 
 import jakarta.ws.rs.QueryParam;
 

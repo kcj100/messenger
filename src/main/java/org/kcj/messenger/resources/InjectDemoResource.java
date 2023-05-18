@@ -1,4 +1,4 @@
-package org.kcj.messenger3.resources;
+package org.kcj.messenger.resources;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.CookieParam;

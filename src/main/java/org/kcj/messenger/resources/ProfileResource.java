@@ -1,4 +1,4 @@
-package org.kcj.messenger3.resources;
+package org.kcj.messenger.resources;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -10,8 +10,8 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
-import org.kcj.messenger3.model.Profile;
-import org.kcj.messenger3.service.ProfileService;
+import org.kcj.messenger.model.Profile;
+import org.kcj.messenger.service.ProfileService;
 
 @Path("profiles")
 @Consumes(MediaType.APPLICATION_JSON)

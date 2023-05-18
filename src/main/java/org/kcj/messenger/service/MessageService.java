@@ -1,11 +1,11 @@
-package org.kcj.messenger3.service;
+package org.kcj.messenger.service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-import org.kcj.messenger3.database.DatabaseClass;
-import org.kcj.messenger3.model.Message;
+import org.kcj.messenger.database.DatabaseClass;
+import org.kcj.messenger.model.Message;
 
 public class MessageService {
 
