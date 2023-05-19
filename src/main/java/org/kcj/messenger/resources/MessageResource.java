@@ -30,14 +30,14 @@ public class MessageResource {
 
     @GET
     public List<Message> getMessages(@BeanParam MessageFilterBean filterBean) {
-        if (filterBean.getYear()  > 0) {
+        if (filterBean.getYear() > 0) {
             return messageService.getAllMessagesForYear(filterBean.getYear());
         }
-        
+
         if (filterBean.getStart() >= 0 && filterBean.getSize() >= 0) {
             return messageService.getAllMessagesPaginated(filterBean.getStart(), filterBean.getSize());
         }
-        
+
         return messageService.getAllMessages();
     }
 
@@ -68,10 +68,22 @@ public class MessageResource {
 
     @GET
     @Path("{messageId}")
-    public Message test(@PathParam("messageId") long id) {
-        return messageService.getMessage(id);
+    public Message getMessage(@PathParam("messageId") long id, @Context UriInfo uriInfo) {
+        Message message = messageService.getMessage(id);
+        
+        message.addLink(getUriforSelf(uriInfo, message), "self");
+        return message;
     }
     
+    private String getUriforSelf(UriInfo uriInfo, Message message) {
+        String uri = uriInfo.getBaseUriBuilder()
+                .path(MessageResource.class)
+                .path(Long.toString(message.getId()))
+                .build()
+                .toString();
+        return uri;
+    }
+
 //    @Path("{messageId}/comments")
 //    public CommentResource getCommentResource() {
 //        return new CommentResource();

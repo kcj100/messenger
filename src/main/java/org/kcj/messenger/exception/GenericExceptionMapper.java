@@ -6,7 +6,6 @@ import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 import org.kcj.messenger.model.ErrorMessage;
 
-@Provider
 public class GenericExceptionMapper implements ExceptionMapper<Throwable> {
 
     public Response toResponse(Throwable ex) {
