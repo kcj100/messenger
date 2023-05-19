@@ -14,7 +14,7 @@ import org.kcj.messenger.resources.beans.MessageFilterBean;
 import org.kcj.messenger.service.CommentService;
 import org.kcj.messenger.service.MessageService;
 
-@Path("/")
+@Path("/messages/{messageId}/comments")
 public class CommentResource {
     
     private CommentService commentService = new CommentService();
@@ -44,7 +44,7 @@ public class CommentResource {
 
     @GET
     @Path("{commentId}")
-    public Comment getMessage(@PathParam("message") long messageId, @PathParam("commentId") long commentId) {
+    public Comment getMessage(@PathParam("messageId") long messageId, @PathParam("commentId") long commentId) {
         return commentService.getComment(messageId, commentId);
     }
 }

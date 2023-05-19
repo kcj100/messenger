@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import org.kcj.messenger.database.DatabaseClass;
+import org.kcj.messenger.exception.DataNotFoundException;
 import org.kcj.messenger.model.Message;
 
 public class MessageService {
@@ -33,7 +34,9 @@ public class MessageService {
 
     public List<Message> getAllMessagesPaginated(int start, int size) {
         ArrayList<Message> list = new ArrayList<Message>(messages.values());
-        if (start + size > list.size()) return new ArrayList<Message>();
+        if (start + size > list.size()) {
+            return new ArrayList<Message>();
+        }
         return list.subList(start, start + size);
     }
 
@@ -56,7 +59,11 @@ public class MessageService {
     }
 
     public Message getMessage(long messageId) {
-        return messages.get(messageId);
+        Message message = messages.get(messageId);
+        if (message == null) {
+            throw new DataNotFoundException("Message with id " + messageId + " not found");
+        }
+        return message;
     }
 
 }
