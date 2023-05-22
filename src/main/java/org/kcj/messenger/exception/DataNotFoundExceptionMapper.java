@@ -11,7 +11,7 @@ public class DataNotFoundExceptionMapper implements ExceptionMapper<DataNotFound
 
     @Override
     public Response toResponse(DataNotFoundException ex) {
-        c
+        return null;
     }
     
 }

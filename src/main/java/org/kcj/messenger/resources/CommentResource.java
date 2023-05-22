@@ -14,7 +14,7 @@ import org.kcj.messenger.resources.beans.MessageFilterBean;
 import org.kcj.messenger.service.CommentService;
 import org.kcj.messenger.service.MessageService;
 
-@Path("/messages/{messageId}/comments")
+@Path("/")
 public class CommentResource {
     
     private CommentService commentService = new CommentService();

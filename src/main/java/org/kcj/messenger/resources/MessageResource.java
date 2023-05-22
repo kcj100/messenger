@@ -23,13 +23,15 @@ import org.kcj.messenger.service.MessageService;
 
 @Path("messages")
 @Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Produces(value = {MediaType.APPLICATION_JSON})
 public class MessageResource {
 
     MessageService messageService = new MessageService();
 
     @GET
-    public List<Message> getMessages(@BeanParam MessageFilterBean filterBean) {
+    @Produces(value = {MediaType.APPLICATION_JSON})
+    public List<Message> getJsonMessages(@BeanParam MessageFilterBean filterBean) {
+        System.out.println("JSON method called");
         if (filterBean.getYear() > 0) {
             return messageService.getAllMessagesForYear(filterBean.getYear());
         }
@@ -40,7 +42,20 @@ public class MessageResource {
 
         return messageService.getAllMessages();
     }
+    @GET
+    @Produces(value = {MediaType.TEXT_XML})
+    public List<Message> getXmlMessages(@BeanParam MessageFilterBean filterBean) {
+        System.out.println("XML method called");
+        if (filterBean.getYear() > 0) {
+            return messageService.getAllMessagesForYear(filterBean.getYear());
+        }
 
+        if (filterBean.getStart() >= 0 && filterBean.getSize() >= 0) {
+            return messageService.getAllMessagesPaginated(filterBean.getStart(), filterBean.getSize());
+        }
+
+        return messageService.getAllMessages();
+    }
     @POST
     public Response addMessage(Message message, @Context UriInfo uriInfo) {
         System.out.println(uriInfo.getAbsolutePath());
@@ -70,11 +85,13 @@ public class MessageResource {
     @Path("{messageId}")
     public Message getMessage(@PathParam("messageId") long id, @Context UriInfo uriInfo) {
         Message message = messageService.getMessage(id);
-        
+
         message.addLink(getUriforSelf(uriInfo, message), "self");
+        message.addLink(getUriforProfile(uriInfo, message), "profile");
+        message.addLink(gerUriForComments(uriInfo, message), "comments");
         return message;
     }
-    
+
     private String getUriforSelf(UriInfo uriInfo, Message message) {
         String uri = uriInfo.getBaseUriBuilder()
                 .path(MessageResource.class)
@@ -84,8 +101,26 @@ public class MessageResource {
         return uri;
     }
 
-//    @Path("{messageId}/comments")
-//    public CommentResource getCommentResource() {
-//        return new CommentResource();
-//    }
+    private String getUriforProfile(UriInfo uriInfo, Message message) {
+        URI uri = uriInfo.getBaseUriBuilder()
+                .path(ProfileResource.class)
+                .path(message.getAuthor())
+                .build();
+        return uri.toString();
+    }
+
+    private String gerUriForComments(UriInfo uriInfo, Message message) {
+        URI uri = uriInfo.getBaseUriBuilder()
+                .path(MessageResource.class)
+                .path(MessageResource.class, "getCommentResource")
+                .path(CommentResource.class)
+                .resolveTemplate("messageId", message.getId())
+                .build();
+        return uri.toString();
+    }
+
+    @Path("{messageId}/comments")
+    public CommentResource getCommentResource() {
+        return new CommentResource();
+    }
 }
